@@ -13,30 +13,101 @@
 
     <div class="card-body">
       <h5 class="card-title text-center" style="text-transform: uppercase">
-        {{ username }}
+        {{ userEntity.username }}
       </h5>
       <div class="container text-center inputs-container">
         <ul class="list-group list-group-flush list_info">
-          <li class="list-group-item"><span>Nombre: </span> Soni</li>
-          <li class="list-group-item"><span>Apellido: </span> Soni</li>
-          <li class="list-group-item"><span>Email: </span> Soni</li>
-          <li class="list-group-item"><span>Usuario: </span>  {{ username }}</li>
+          <li class="list-group-item"><span>Nombre: </span> {{ userEntity.name }}</li>
+          <li class="list-group-item"><span>Apellido: </span> {{ userEntity.lastname }}</li>
+          <li class="list-group-item"><span>Email: </span> {{ userEntity.email }}</li>
+          <li class="list-group-item"><span>ROL: </span> {{ userEntity.rol }}</li>
+          <li class="list-group-item"><span>Usuario: </span>  {{ userEntity.username }}</li>
         </ul>
+        <div class="ajustRight">
+          <a class="card-link"  data-bs-toggle="modal" data-bs-target="#updateChangePassword" (click)="clearDataModel()">Cambiar contraseña</a>
+        </div>
 
         <div class="row">
           <div class="col">
             <div class="d-grid gap-2 col-6 mx-auto">
-              <button type="button" class="btn btn-primary mt-3">Editar</button>
+              <button type="button" class="btn btn-primary mt-3"  data-bs-toggle="modal" data-bs-target="#updateChange" (click)="editarData()"> Editar</button>
             </div>
 
           </div>
           <div class="col">
             <div class="d-grid gap-2 col-6 mx-auto">
-              <button type="button" class="btn btn-danger mt-3">Eliminar</button>
+              <button type="button" class="btn btn-danger mt-3" (click)="deleteUsuario()">Eliminar</button>
             </div>
           </div>
         </div>
 
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="modal " tabindex="-1" id="updateChangePassword">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cambio Contraseña </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group flex-nowrap input">
+          <input type="password" class="form-control" placeholder="Contraseña" aria-describedby="addon-wrapping"
+            [(ngModel)]="userRequest.password" (input)="onChangeValuesPassword()" />
+        </div>
+        <br>
+        <div class="input-group flex-nowrap input">
+          <input type="password" class="form-control" class="form-control" placeholder="Nueva Contraseña" aria-describedby="addon-wrapping"
+          [(ngModel)]="userRequest.passwordChange" (input)="onChangeValuesPassword()"/>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" [disabled]="!validButton" (click)="createUpdatePasswordChange()">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal " tabindex="-1" id="updateChange">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cambio Contraseña </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group flex-nowrap input">
+          <input type="text" class="form-control" placeholder="Nombre" aria-describedby="addon-wrapping"
+            [(ngModel)]="userRequest.name" (input)="onChangeValues()" />
+        </div>
+        <br>
+        <div class="input-group flex-nowrap input">
+          <input type="text" class="form-control" placeholder="Apellido" aria-describedby="addon-wrapping"
+            [(ngModel)]="userRequest.lastname" (input)="onChangeValues()" />
+        </div>
+        <br>
+        <div class="input-group flex-nowrap input">
+          <input type="text" class="form-control" placeholder="Correo" aria-describedby="addon-wrapping"
+            [(ngModel)]="userRequest.email" (input)="onChangeValues()" />
+        </div>
+        <br>
+        <div class="input-group flex-nowrap input">
+          <input type="text" class="form-control" placeholder="Usuario" aria-describedby="addon-wrapping"
+            [(ngModel)]="userRequest.username" (input)="onChangeValues()" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" [disabled]="!validButton" (click)="createUpdateUser()" data-bs-dismiss="modal">Actualizar</button>
       </div>
     </div>
   </div>

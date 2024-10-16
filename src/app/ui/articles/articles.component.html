@@ -1,4 +1,66 @@
 <div class="container-md mt-2">
+  <br />
 
-  <h1>Articulos</h1>
+  <h1>
+    Articulos:
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#createArticle" (click)="chageEditToCreate()">Crear Articulo +</button>
+  </h1>
+
+  <br />
+  <div class="text-center">
+    <div class="row row-cols-auto" >
+      <div class="col" *ngFor="let article of articlesList">
+        <br>
+        <div class="card" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title">{{ article.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+              {{ article.email }}
+            </h6>
+            <p class="card-text ellipsis_content">
+              {{ article.content }}
+            </p>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createArticle" (click)="setTypeUpdate(article.title!,article.content!,article.id!)" >Editar</button>
+              <button type="button" class="btn btn-danger" (click)="deleteArticle(article.id!)">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal " tabindex="-1" id="createArticle">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 *ngIf="!edit" class="modal-title">Crear Articulo</h5>
+          <h5 *ngIf="edit" class="modal-title">Actualizar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group flex-nowrap input">
+            <input type="text" class="form-control" placeholder="Título del Artículo" aria-describedby="addon-wrapping"
+              [(ngModel)]="articleRequest.title" (input)="onChangeValues()" />
+          </div>
+          <br>
+          <div class="input-group flex-nowrap input">
+            <textarea class="form-control" class="form-control" placeholder="Descripción del Artículo" aria-describedby="addon-wrapping"
+            [(ngModel)]="articleRequest.content" (input)="onChangeValues()"></textarea>
+
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button *ngIf="!edit" type="button" class="btn btn-primary" [disabled]="!validButton" (click)="createUpdateArticle()">Crear</button>
+          <button *ngIf="edit" type="button" class="btn btn-primary" [disabled]="!validButton" (click)="createUpdateArticle()">Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-is-empty *ngIf="isEmptyList"/>
 </div>

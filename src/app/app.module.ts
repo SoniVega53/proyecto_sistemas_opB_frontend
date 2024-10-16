@@ -12,6 +12,7 @@ import { UserComponent } from './ui/user/user.component';
 import { RegisterComponent } from './ui/register/register.component';
 import { ArticlesComponent } from './ui/articles/articles.component';
 import { PerfilComponent } from './ui/perfil/perfil.component';
+import { IsEmptyComponent } from './ui/is-empty/is-empty.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { PerfilComponent } from './ui/perfil/perfil.component';
     RegisterComponent,
     ArticlesComponent,
     PerfilComponent,
+    IsEmptyComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [

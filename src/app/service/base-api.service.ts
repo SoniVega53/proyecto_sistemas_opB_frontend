@@ -7,8 +7,8 @@ import { catchError, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class BaseApiService {
-  public urlService: string = 'http://172.18.0.1:9090/api/proyecto/';
-  //public urlService: string = "http://spring-container-docker:9090/api/proyecto/"
+  //public urlService: string = 'http://172.18.0.1:9090/api/proyecto/';
+  public urlService: string = "http://localhost:9090/api/proyecto/"
 
   constructor(public http: HttpClient, public router: Router) {}
 
@@ -24,8 +24,13 @@ export class BaseApiService {
   }
 
   protected deleteService(url: string): Observable<any> {
+    const token = localStorage.getItem('token'); // Obtén el token del localStorage
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
     return this.http
-      .delete(this.urlService.concat(url))
+      .delete(this.urlService.concat(url),{headers})
       .pipe(catchError(async (e) => console.log(e)));
   }
 
@@ -36,8 +41,13 @@ export class BaseApiService {
   }
 
   protected postServiceBody(url: string, body: any): Observable<any> {
+    const token = localStorage.getItem('token'); // Obtén el token del localStorage
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
     return this.http
-      .post(this.urlService.concat(url), body)
+      .post(this.urlService.concat(url), body,{headers})
       .pipe(catchError(async (e) => console.log(e)));
   }
 
