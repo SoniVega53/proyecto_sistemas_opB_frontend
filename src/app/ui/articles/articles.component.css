@@ -1,0 +1,12 @@
+.card {
+  height: 14rem;
+}
+
+.ellipsis_content {
+  display: -webkit-box; /* Usado para múltiples líneas */
+  -webkit-box-orient: vertical; /* Orientación vertical */
+  -webkit-line-clamp: 3; /* Número de líneas a mostrar */
+  overflow: hidden; /* Oculta el texto que excede */
+  text-overflow: ellipsis; /* Muestra "..." al final del texto truncado */
+  height: 4.5em;
+}
